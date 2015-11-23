@@ -1,7 +1,7 @@
 var http = require('http');
 var pdf = require('html-pdf');
 
-var options = { format: 'Letter' };
+var options = { format: 'Letter', border: '.5in' };
 
 const PORT = 9050;
 
@@ -12,7 +12,7 @@ var server = http.createServer(function(req,res) {
 	});
 
 	req.on('end', function() {
-		pdf.create(html).toStream(function(err,stream) {
+		pdf.create(html,options).toStream(function(err,stream) {
 			stream.pipe(res);
 		});
 	});
